@@ -7,15 +7,14 @@
 #include "inbulk.hpp"
 #include "fstream"
 
-
 using namespace std;
 
 void Menu::execute()
 {
     bool isRunning = true;
     fstream file;
-    file.open("naplo.txt",ios::app);
-    if(!checkNaplo(file))
+    file.open("naplo.txt", ios::app);
+    if (!checkNaplo(file))
     {
         return;
     }
@@ -23,21 +22,21 @@ void Menu::execute()
     while (isRunning)
     {
         string selectedItem;
-        cout << "*******************************\n";
+        cout << "*******************************" << endl;
         cout << "Főmenü\n";
-        cout << " 1 - Újabb árutípus felvétele.\n";
-        cout << " 2 - Adott mennyiségű árucikk bevitele a raktárba.\n";
-        cout << " 3 - Adott mennyiségű árucikk kivétele a raktárból.\n";
-        cout << " 4 - Jelenlegi árukészlet listázása.\n";
-        cout << " 5 - Kilépés.\n";
-        cout << " 6 - Naplófájl beolvasása.\n";
+        cout << " 1 - Újabb árutípus felvétele." << endl;
+        cout << " 2 - Adott mennyiségű árucikk bevitele a raktárba." << endl;
+        cout << " 3 - Adott mennyiségű árucikk kivétele a raktárból." << endl;
+        cout << " 4 - Jelenlegi árukészlet listázása." << endl;
+        cout << " 5 - Kilépés." << endl;
+        cout << " 6 - Naplófájl beolvasása." << endl;
         cout << " Kérem válasszon menüpontot és nyomjon egy entert.: ";
         cin >> selectedItem;
         cout << endl;
 
         char sel = selectedItem[0];
 
-        switch(sel)
+        switch (sel)
         {
         case '1':
             inputProductTpye();
@@ -60,7 +59,6 @@ void Menu::execute()
         default:
             cout << "Ismeretlen kifejezés!" << endl;
             break;
-
         }
     }
 }
@@ -71,19 +69,19 @@ void Menu::inputProductTpye()
     string code, name, manifacture, buffer;
     int price, weight, storageAmount;
     fstream file;
-    file.open("naplo.txt",ios::app);
-    while(isNextInput)
+    file.open("naplo.txt", ios::app);
+    while (isNextInput)
     {
         cout << "Termék neve:" << endl;
-        cin >>name;
+        cin >> name;
         cout << "Termék gyártója:" << endl;
-        cin >>manifacture;
+        cin >> manifacture;
         cout << "Termék raktári mennyisége:" << endl;
-        cin >>buffer;
+        cin >> buffer;
         storageAmount = atoi(buffer.c_str());
         cout << "Darabárú vagy Lédig? (d/l): ";
         cin >> buffer;
-        if(buffer[0] == 'd')
+        if (buffer[0] == 'd')
         {
             cout << "Termék Kód(8 vagy 10 karakter): ";
             cin >> code;
@@ -91,11 +89,11 @@ void Menu::inputProductTpye()
             cout << "Ár: ";
             cin >> buffer;
             price = atoi(buffer.c_str());
-            Piece* piece = new Piece(code,name,manifacture,storageAmount,price);
+            Piece *piece = new Piece(code, name, manifacture, storageAmount, price);
             storage_m[index_m] = piece;
             file << "[inputProductTpye]-> " << storage_m[index_m];
         }
-        if(buffer[0] == 'l')
+        if (buffer[0] == 'l')
         {
             cout << "Termék Kód(10 karakter): ";
             cin >> code;
@@ -105,15 +103,17 @@ void Menu::inputProductTpye()
             cout << "Súly(g): ";
             cin >> buffer;
             weight = atoi(buffer.c_str());
-            Inbulk* inbulk = new Inbulk(code,name,manifacture,storageAmount,price,weight);
-            while(!inbulk->validateCode(code))
-            if(inbulk->validateCode(code)){
-                cout << "A megadott kód validálva." << endl;
-            }
-            else{
-                cout << "Termék Kód(10 karakter): ";
-                cin >> code;
-            };
+            Inbulk *inbulk = new Inbulk(code, name, manifacture, storageAmount, price, weight);
+            while (!inbulk->validateCode(code))
+                if (inbulk->validateCode(code))
+                {
+                    cout << "A megadott kód validálva." << endl;
+                }
+                else
+                {
+                    cout << "Termék Kód(10 karakter): ";
+                    cin >> code;
+                };
             storage_m[index_m] = inbulk;
             file << "[inputProductTpye]-> " << storage_m[index_m] << endl;
         }
@@ -130,7 +130,7 @@ void Menu::inputProductTpye()
 
 void Menu::listProducts()
 {
-    for(int i=0; i < index_m; ++i)
+    for (int i = 0; i < index_m; ++i)
     {
         cout << storage_m[i] << "Ár:" << storage_m[i]->calculatedPrice() << endl;
     }
@@ -139,20 +139,20 @@ void Menu::listProducts()
 void Menu::addProcuts()
 {
     fstream file;
-    file.open("naplo.txt",ios::app);
+    file.open("naplo.txt", ios::app);
     bool isAdded = true;
     string code, buffer;
     int addedAmount, amount;
-    while(isAdded)
+    while (isAdded)
     {
         cout << "Kérem adja meg a termék kódját:";
         cin >> code;
         cout << "Kérem adja meg a meg mennyivel bővítené a raktárkészletet:";
         cin >> buffer;
         addedAmount = atoi(buffer.c_str());
-        for(int i=0; i < index_m; ++i)
+        for (int i = 0; i < index_m; ++i)
         {
-            if(storage_m[i]->code() == code)
+            if (storage_m[i]->code() == code)
             {
                 amount = storage_m[i]->storageAmount() + addedAmount;
                 storage_m[i]->setStorageAmount(amount);
@@ -175,24 +175,25 @@ void Menu::witdrawProducts()
     string code, buffer;
     int addedAmount, amount;
     fstream file;
-    file.open("naplo.txt",ios::app);
-    while(isAdded)
+    file.open("naplo.txt", ios::app);
+    while (isAdded)
     {
         cout << "Kérem adja meg a termék kódját:";
         cin >> code;
         cout << "Kérem adja meg a meg mennyivel csökkentené a raktárkészletet:";
         cin >> buffer;
         addedAmount = atoi(buffer.c_str());
-        for(int i=0; i < index_m; ++i)
+        for (int i = 0; i < index_m; ++i)
         {
-            if(storage_m[i]->code() == code)
+            if (storage_m[i]->code() == code)
             {
 
                 amount = storage_m[i]->storageAmount() - addedAmount;
-                if(amount < 0)
+                if (amount < 0)
                 {
                     cout << "Ekkora mennyiséget nem vehet ki a raktárból! Jelenlegi mennyiség:" << storage_m[i]->storageAmount() << endl;
-                    file << "[witdrawProducts]->" << "Ekkora mennyiséget nem vehet ki a raktárból! Jelenlegi mennyiség:" << storage_m[i]->storageAmount() << endl;
+                    file << "[witdrawProducts]->"
+                         << "Ekkora mennyiséget nem vehet ki a raktárból! Jelenlegi mennyiség:" << storage_m[i]->storageAmount() << endl;
                 }
                 else
                 {
@@ -211,26 +212,27 @@ void Menu::witdrawProducts()
     file.close();
 }
 
-void Menu::readNaplo(fstream& file)
+void Menu::readNaplo(fstream &file)
 {
-    file.open("naplo.txt",ios::in);
+    file.open("naplo.txt", ios::in);
     string x;
-    while (file >> x) {
-       cout << x << endl;
+    while (file >> x)
+    {
+        cout << x << endl;
     }
     file.close();
 }
 
-bool Menu::checkNaplo(fstream& file)
+bool Menu::checkNaplo(fstream &file)
 {
-    if(!file)
+    if (!file)
     {
-        cout << "Napló nem létezik!"<<endl;
+        cout << "Napló nem létezik!" << endl;
         return false;
     }
     else
     {
-        cout << "Napló elérhető!"<<endl;
+        cout << "Napló elérhető!" << endl;
         return true;
     }
 }
@@ -239,12 +241,6 @@ Menu::~Menu()
 {
     for (int i = 0; i < index_m; ++i)
     {
-        delete(storage_m[i]);
+        delete (storage_m[i]);
     }
 }
-
-
-
-
-
-
