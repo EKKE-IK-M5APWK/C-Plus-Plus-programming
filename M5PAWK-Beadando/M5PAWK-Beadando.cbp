@@ -32,7 +32,15 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Menu.cpp" />
+		<Unit filename="Menu.hpp" />
+		<Unit filename="inbulk.cpp" />
+		<Unit filename="inbulk.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="piece.cpp" />
+		<Unit filename="piece.hpp" />
+		<Unit filename="product.cpp" />
+		<Unit filename="product.hpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

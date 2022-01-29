@@ -1,0 +1,2 @@
+[inputProductTpye]-> [11111111] N�v:adasda Gy�rt�:2313 Rakt�r mennyis�g(db):212 �r:1000
+[inputProductTpye]-> [00000000] N�v:3123213 Gy�rt�:asdasdassaas Rakt�r mennyis�g(db):10 �r:4234232

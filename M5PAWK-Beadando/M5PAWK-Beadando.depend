@@ -1,4 +1,42 @@
 # depslib dependency file v1.0
-1584205420 source:d:\github\c-plus-plus-programming\m5pawk-beadando\main.cpp
+1643476428 source:d:\github\c-plus-plus-programming\m5pawk-beadando\main.cpp
 	<iostream>
+	"Menu.hpp"
+
+1643481485 source:d:\github\c-plus-plus-programming\m5pawk-beadando\product.cpp
+	<iostream>
+	<string>
+	"product.hpp"
+
+1643485429 d:\github\c-plus-plus-programming\m5pawk-beadando\product.hpp
+	<string>
+	<iostream>
+
+1643480762 source:d:\github\c-plus-plus-programming\m5pawk-beadando\piece.cpp
+	"piece.hpp"
+
+1643480636 d:\github\c-plus-plus-programming\m5pawk-beadando\piece.hpp
+	<string>
+	"product.hpp"
+
+1643480753 source:d:\github\c-plus-plus-programming\m5pawk-beadando\inbulk.cpp
+	"inbulk.hpp"
+
+1643480617 d:\github\c-plus-plus-programming\m5pawk-beadando\inbulk.hpp
+	<string>
+	"product.hpp"
+
+1643488274 d:\github\c-plus-plus-programming\m5pawk-beadando\menu.hpp
+	<array>
+	<string>
+	"product.hpp"
+
+1643483382 source:d:\github\c-plus-plus-programming\m5pawk-beadando\menu.cpp
+	<iostream>
+	<string>
+	<stdlib.h>
+	"Menu.hpp"
+	"product.hpp"
+	"piece.hpp"
+	"inbulk.hpp"
 
